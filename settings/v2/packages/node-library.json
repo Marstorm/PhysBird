@@ -1,0 +1,17 @@
+{
+  "custom": [
+    {
+      "name": "i18n:node-library.groups.custom",
+      "items": [
+        {
+          "type": "cc.Prefab",
+          "value": "979adcdb-eb89-4ad1-ab01-50004da28aa8",
+          "name": "Wall",
+          "assetUuid": "979adcdb-eb89-4ad1-ab01-50004da28aa8",
+          "icon": "ui-kit://icon/images/ui-prefab/default.png",
+          "unlinkPrefab": true
+        }
+      ]
+    }
+  ]
+}
