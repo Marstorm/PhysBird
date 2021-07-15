@@ -12,7 +12,6 @@ export class Game extends Component {
     // [2]
     
     onLoad(){
-
         director._kSpeed = 1;
         var _originpostUpdate = PhysicsSystem2D.prototype.postUpdate;
         var _originfixedTimeStep = PhysicsSystem2D.instance.fixedTimeStep;

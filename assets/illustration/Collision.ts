@@ -1,9 +1,9 @@
 
-import { _decorator, Component, Node, CircleCollider2D, Collider2D, Contact2DType, IPhysics2DContact, PhysicsSystem2D, director, Graphics, GraphicsComponent, RigidBodyComponent, RigidBody2D, Label } from 'cc';
+import { _decorator, Component, Node, CircleCollider2D, Collider2D, Contact2DType, IPhysics2DContact, PhysicsSystem2D, director, Graphics, GraphicsComponent, RigidBodyComponent, RigidBody2D, Label, Vec2 } from 'cc';
 const { ccclass, property } = _decorator;
 
-@ccclass('Timescale')
-export class Timescale extends CircleCollider2D {
+@ccclass('Collision')
+export class Collision extends CircleCollider2D {
     touchingCountMap: Map<Array<number>, number> = new Map;
     @property(Node)
     target : Node = null!;
@@ -21,8 +21,8 @@ export class Timescale extends CircleCollider2D {
             collider.on(Contact2DType.END_CONTACT, this.onEndContact, this);
         }
         globalThis.ts = this;
-        this.velocity = this.node.getComponent(Graphics);
-        this.info = this.node.getComponent(Label);
+        this.velocity = this.node.getComponentInChildren(Graphics);
+        this.info = this.node.getComponentInChildren(Label);
     }
 
     onBeginContact (selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
@@ -53,6 +53,9 @@ export class Timescale extends CircleCollider2D {
             let l=body?.linearVelocity.length();
             this.velocity.clear();
             this.drawLine(0,0,-l*5,0);
+            let v= body?.linearVelocity.clone();
+            
+            this.info.string = v.toString()
         }
     }
 
