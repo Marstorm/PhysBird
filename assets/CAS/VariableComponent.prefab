@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ConstantComponent",
+    "_name": "VariableComponent",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

@@ -1,26 +1,22 @@
 
 import { _decorator, Component, Node, EventTouch } from 'cc';
-import { Variable } from './Constant';
+import { CASVariable } from './Variable';
 const { ccclass, property } = _decorator;
 
 class CAS {
 
-    public static nodes_map: Map<Variable, Variable> = new Map<Variable, Variable>();
-    public static named_map: Map<string, Variable> = new Map<string, Variable>();
-    public static active_var: Variable=null!;
+    public static nodes_map: Map<CASVariable, CASVariable> = new Map<CASVariable, CASVariable>();
+    public static named_map: Map<string, CASVariable> = new Map<string, CASVariable>();
+    public static active_var: CASVariable=null!;
 
-    public static register_variable(name: string, variable: Variable){
+    public static register_variable(name: string, variable: CASVariable){
         // find an suitable name
         let named_map = CAS.named_map;
         if(name=='' || named_map.size==0){
             name = 'A';
         }
         while(CAS.named_map.has(name)){
-            let last_name = 'A';
-            for (const [key, value] of named_map.entries()) {
-                last_name=key;
-            }
-            name = String.fromCharCode(last_name?.charCodeAt(0)+1);
+            name = String.fromCharCode(name?.charCodeAt(0)+1);
         }
         named_map.set(name, variable);
 
@@ -32,13 +28,12 @@ class CAS {
     }
 
     public static onValueClick(event: EventTouch){
-        let variable = event.target.getComponent(Variable);
+        let variable = event.target.getComponent(CASVariable);
         if(!variable)
         {return;}
         if(CAS.active_var){
 
-            variable.value = CAS.active_var.value;
-            variable.update_value();
+            variable.set_value(CAS.active_var.value);
             CAS.active_var = null!;
         }
         else{

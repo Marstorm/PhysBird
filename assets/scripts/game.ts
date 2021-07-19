@@ -1,7 +1,8 @@
 
 import { _decorator, Component, Node, RigidBody, director, SystemEventType, Director, game } from 'cc';
-import {PhysicsSystem2D, Contact2DType, Collider2D, EPhysics2DDrawFlags} from 'cc';
+import { PhysicsSystem2D, Contact2DType, Collider2D, EPhysics2DDrawFlags } from 'cc';
 const { ccclass, property } = _decorator;
+
 
 @ccclass('Game')
 export class Game extends Component {
@@ -10,21 +11,32 @@ export class Game extends Component {
     // dummy = '';
 
     // [2]
-    
-    onLoad(){
+
+    onLoad() {
         director._kSpeed = 1;
         var _originpostUpdate = PhysicsSystem2D.prototype.postUpdate;
         var _originfixedTimeStep = PhysicsSystem2D.instance.fixedTimeStep;
-        
+
         PhysicsSystem2D.prototype.postUpdate = function (dt) {
             _originpostUpdate.call(this, dt * director._kSpeed);
         }
-        director.set_kSpeed = function (ratio: number){
+        director.set_kSpeed = function (ratio: number) {
             director._kSpeed = ratio;
-            PhysicsSystem2D.instance.fixedTimeStep = _originfixedTimeStep*ratio;
+            PhysicsSystem2D.instance.fixedTimeStep = _originfixedTimeStep * ratio;
+        }
+
+        game.users = {
+            'erow': {
+                'ability': [100, 50, 60, 100, 100, 0],
+                'score': 1000
+            },
+            'stardust': {
+                'ability': [60, 100, 100, 0, 100, 50],
+                'score': 1000
+            }
         }
     }
-    start () {
+    start() {
         // [3]
         PhysicsSystem2D.instance.debugDrawFlags = EPhysics2DDrawFlags.Aabb |
             EPhysics2DDrawFlags.Pair |
@@ -34,22 +46,22 @@ export class Game extends Component {
         // PhysicsSystem2D.instance.on(Contact2DType.BEGIN_CONTACT, this.onBeinContact, this);
         // PhysicsSystem2D.instance.on(Contact2DType.END_CONTACT, this.onEndContact, this);
         globalThis.physics2d = PhysicsSystem2D.instance;
-        
+
     }
 
-    onRestart(event: TouchEvent){
+    onRestart(event: TouchEvent) {
         game.restart();
     }
 
-    
-    addContact (c: Collider2D) {
+
+    addContact(c: Collider2D) {
         let count = this.touchingCountMap.get(c.node) || 0;
         this.touchingCountMap.set(c.node, ++count);
-        console.log('add',c.node);
-        
+        console.log('add', c.node);
+
     }
 
-    removeContact (c: Collider2D) {
+    removeContact(c: Collider2D) {
         let count = this.touchingCountMap.get(c.node) || 0;
         --count;
         if (count <= 0) {
@@ -60,12 +72,12 @@ export class Game extends Component {
         }
     }
 
-    onBeinContact (a: Collider2D, b: Collider2D) {
+    onBeinContact(a: Collider2D, b: Collider2D) {
         this.addContact(a);
         this.addContact(b);
     }
 
-    onEndContact (a: Collider2D, b: Collider2D) {
+    onEndContact(a: Collider2D, b: Collider2D) {
         this.removeContact(a);
         this.removeContact(b);
     }

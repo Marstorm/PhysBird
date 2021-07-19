@@ -1,28 +1,34 @@
-import { _decorator, Component, Node, Label, Game, find } from 'cc';
+import { _decorator, Component, Node, Label, Game, find, CCInteger, CCFloat } from 'cc';
 import { CAS } from './CAS';
 const { ccclass, property } = _decorator;
 
-@ccclass('Variable')
-export class Variable extends Component {
-    // [1]
-    // dummy = '';
 
-    // [2]
-    @property
-    constant: boolean = true;
+@ccclass('CASVariable')
+export class CASVariable extends Component {
 
     @property
-    value_name: string = "";
+    public constant: boolean = true;
 
+    @property
+    public value_name: string = "";
+
+    // _value: number = 0;
     @property
     value: number = 0;
+
+    public set_value(v: number){
+        this.value=v;
+        this.update_value();
+    }
+    
+    // public get value(){
+    //     return this._value;
+    // }
 
     // @property(Label)
     label: Label = null!;
 
-
-
-    start () {
+    onLoad () {
         // [3]
         this.label = this.node.getComponent(Label);
         this.value_name = CAS.register_variable(this.value_name, this);
