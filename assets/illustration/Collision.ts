@@ -8,7 +8,7 @@ export class Collision extends CircleCollider2D {
     @property(Node)
     target : Node = null!;
 
-    // @property(Graphics)
+    // TODO: 逻辑与绘图分离
     velocity: Graphics = null!;
     info: Label = null!;
 
@@ -59,7 +59,6 @@ export class Collision extends CircleCollider2D {
         }
     }
 
-    	
     drawLine(x:number, y:number, rx:number, ry:number) {
         let graphics = this.velocity;
         graphics.moveTo(x, y);

@@ -11,6 +11,7 @@ export class Launch extends Component {
     // [2]
     // @property
     // serializableDummy = 0;
+    // TODO: 删除，合并至level
     @property(RigidBody2D)
     bird: RigidBody2D = null!;
 
@@ -20,12 +21,9 @@ export class Launch extends Component {
 
     start () {
 
-        // this.bird = this.getComponent(RigidBody2D);
-        const outRay = new geometry.Ray(0,0,0,0,-1,0);
-        globalThis.launcher = this;
         console.log(this.node, find('theta',this.node), this.node.getComponentsInChildren(EditBoxComponent));
-        this.theta = find('theta',this.node)?.getComponent(EditBoxComponent);
-        this.velocity = find('velocity',this.node)?.getComponent(EditBoxComponent);
+        this.theta = find('theta',this.node)?.getComponent(EditBoxComponent)!;
+        this.velocity = find('velocity',this.node)?.getComponent(EditBoxComponent)!;
     }
 
     onLaunch(event:EventTouch){
@@ -38,8 +36,9 @@ export class Launch extends Component {
             this.bird.gravityScale = 1;
             this.bird.linearVelocity=(v);
             this.bird.angularVelocity = 0;
-            this.bird.node.position = Vec3.ZERO;
+            this.bird.node.position = new Vec3(-350, -185, 0);
             // console.log(theta, velocity, this.bird.linearVelocity);
+            
         }
         
     }

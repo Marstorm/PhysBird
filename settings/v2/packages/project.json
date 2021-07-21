@@ -1,6 +1,9 @@
 {
   "__version__": "1.0.1",
   "physics": {
-    "fixedTimeStep": 0.016666
+    "fixedTimeStep": 0.016666,
+    "defaultMaterial": {
+      "restitution": 1
+    }
   }
 }

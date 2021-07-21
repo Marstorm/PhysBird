@@ -1,10 +1,11 @@
-import { _decorator, Component, Node, Label, Game, find, CCInteger, CCFloat } from 'cc';
-import { CAS } from './CAS';
+import { _decorator, Component, Node, Label, Game, find, EventTouch } from 'cc';
+import {CAS} from './CAS'
 const { ccclass, property } = _decorator;
 
 
 @ccclass('CASVariable')
 export class CASVariable extends Component {
+    cas: CAS =null!;
 
     @property
     public constant: boolean = true;
@@ -17,31 +18,45 @@ export class CASVariable extends Component {
     value: number = 0;
 
     public set_value(v: number){
-        this.value=v;
+        if(!this.constant)
+            this.value=v;
         this.update_value();
     }
     
-    // public get value(){
-    //     return this._value;
-    // }
 
-    // @property(Label)
+    @property(Label)
     label: Label = null!;
 
-    onLoad () {
+    start () {
         // [3]
-        this.label = this.node.getComponent(Label);
-        this.value_name = CAS.register_variable(this.value_name, this);
+        if(this.label == null){
+            this.label = this.node.getComponent(Label)!;
+        }
+        let root = find('Canvas')!;
+        this.cas = root.getComponentInChildren(CAS)!;
+
+        this.value_name = this.cas.register_variable(this.value_name, this);
         this.update_value();
+        
+        this.node.on(Node.EventType.TOUCH_START, this.onValueClick, this);
     }
 
     public update_value(){
-        this.label.string = `${this.value_name} = ${this.value.toPrecision(2)}`;
+        // this.label.string = `${this.value_name} = ${this.value.toPrecision(2)}`;
+        this.label.string = `${this.value.toPrecision(2)}(${this.value_name})`;
     }
 
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+    onValueClick(event: EventTouch){
+        console.log('onValueClick',this);
+        let node = event.target.getComponent(CASVariable);
+        if(node.cas.active_var){
+            node.set_value(node.cas.active_var.value);
+            node.cas.active_var = null!;
+        }
+        else{
+            node.cas.active_var = node;
+        }
+    }
 }
 
 /**
