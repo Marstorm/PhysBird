@@ -15,7 +15,7 @@ export class CASVariable extends Component {
 
     // _value: number = 0;
     @property
-    value: number = 0;
+    value: number = null!;
 
     public set_value(v: number){
         if(!this.constant)
@@ -29,9 +29,7 @@ export class CASVariable extends Component {
 
     start () {
         // [3]
-        if(this.label == null){
-            this.label = this.node.getComponent(Label)!;
-        }
+        
         let root = find('Canvas')!;
         this.cas = root.getComponentInChildren(CAS)!;
 
@@ -40,22 +38,48 @@ export class CASVariable extends Component {
         
         this.node.on(Node.EventType.TOUCH_START, this.onValueClick, this);
     }
+    onLoad(){
+        if(this.label == null){
+            this.label = this.node.getComponent(Label)!;
+        }
+        this.label.string = this.toString();
+    }
+
+    public experssion(){
+        if(this.constant)
+            return this.value.toPrecision(2).toString();
+        if(this.value){
+            return `${this.value_name} = ${this.value.toPrecision(2)}`;
+        }
+        else
+            return this.value_name;
+    }
+    public getvalue():number|String {
+        if(this.constant)
+            return this.value;
+        else
+            return this.value_name;
+    }
+
+    public toString = () : string => {
+        return `${this.getvalue()}`;
+    }
 
     public update_value(){
         // this.label.string = `${this.value_name} = ${this.value.toPrecision(2)}`;
-        this.label.string = `${this.value.toPrecision(2)}(${this.value_name})`;
+        this.label.string = this.experssion();
     }
 
     onValueClick(event: EventTouch){
         console.log('onValueClick',this);
-        let node = event.target.getComponent(CASVariable);
-        if(node.cas.active_var){
-            node.set_value(node.cas.active_var.value);
-            node.cas.active_var = null!;
+        if(this.cas.active_var){
+            this.cas.connect(this.cas.active_var,this)
+            this.cas.active_var = null!;
         }
         else{
-            node.cas.active_var = node;
+            this.cas.active_var = this;
         }
+
     }
 }
 

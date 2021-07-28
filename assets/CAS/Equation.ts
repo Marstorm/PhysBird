@@ -1,20 +1,17 @@
 
-import { _decorator, Component, Node, EventTouch } from 'cc';
+import { _decorator, Component, Node, EventTouch, find, math } from 'cc';
 import { CASVariable } from './Variable';
+import {CAS} from './CAS'
 const { ccclass, property } = _decorator;
 
-@ccclass('Equation')
-export class Equation extends Component {
-    // [1]
-    // dummy = '';
-
-    // [2]
-    // @property
-    // serializableDummy = 0;
-
+// @ccclass('Equation')
+export abstract class CASEquation extends Component {
+    private CASRoot     : CAS = null!
     start () {
         // [3]
-        this.node.on(Node.EventType.TOUCH_START, this.onValueChanged, this);
+        let root = find('Canvas')!;
+        this.CASRoot = root.getComponentInChildren(CAS)!;
+        // this.node.on(Node.EventType.TOUCH_START, this.onValueChanged, this);
     }
 
     onCalculation(event: EventTouch){
@@ -23,12 +20,26 @@ export class Equation extends Component {
     }
 
     onValueChanged(event: EventTouch){
+        
         console.log('onValueChanged', event, this);
+        return this.variableSet.length;
         // TODO: 判断当前有几个未知量
     }
 
+    public abstract  experssion(): String;
+
+
     calculate_result(){
-        const variables = this.getComponentsInChildren(CASVariable)!;
+        //const variables = this.getComponentsInChildren(CASVariable)!;
+        let CASVarMap = this.CASRoot.named_map;
+
+        for(let i = 0; i < this.variableSet.length; i++){
+            let varName = this.variableSet[i];
+            if(varName != this.variableToGet){
+                let targetVar = CASVarMap.get(varName);
+                this.variableMap.set(varName, targetVar?.value);
+            }
+        }
         // TODO: 完成计算逻辑
         return null;
     }

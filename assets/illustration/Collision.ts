@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, CircleCollider2D, Collider2D, Contact2DType, IPhysics2DContact, PhysicsSystem2D, director, Graphics, GraphicsComponent, RigidBodyComponent, RigidBody2D, Label, Vec2 } from 'cc';
+import { _decorator, Component, Node, CircleCollider2D, Collider2D, Contact2DType, IPhysics2DContact, PhysicsSystem2D, director, Graphics, GraphicsComponent, RigidBodyComponent, RigidBody2D, Label, Vec2, game } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Collision')
@@ -32,7 +32,7 @@ export class Collision extends CircleCollider2D {
         }
         const contact_type = [selfCollider.tag,otherCollider.tag];
         // otherCollider.tag
-        director.set_kSpeed(0.1);
+        game.set_kSpeed(0.1);
         console.log('onBeginContact',director.getTotalTime(), contact_type,);
         this.is_contact=true;
     }
@@ -42,18 +42,21 @@ export class Collision extends CircleCollider2D {
         }
         // 只在两个碰撞体结束接触时被调用一次
         const contact_type = [selfCollider.tag,otherCollider.tag];
-        director.set_kSpeed(1);
+        game.set_kSpeed(1);
         console.log('onEndContact', director.getTotalTime(), contact_type);
         this.is_contact=false;
+
+        let rock = otherCollider.getComponent(RigidBody2D)!
+        this.info.string = rock.linearVelocity.toString()
     }
     update(dt:number){
         if(this.is_contact==true){
             const body=this.node.getComponent(RigidBody2D);
             const target_body=this.target.getComponent(RigidBody2D);
-            let l=body?.linearVelocity.length();
+            let l=body?.linearVelocity.length()!;
             this.velocity.clear();
             this.drawLine(0,0,-l*5,0);
-            let v= body?.linearVelocity.clone();
+            let v= body!.linearVelocity.clone()!;
             
             this.info.string = v.toString()
         }

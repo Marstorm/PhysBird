@@ -12,10 +12,10 @@ var _originpostUpdate = PhysicsSystem2D.prototype.postUpdate;
 var _originfixedTimeStep = PhysicsSystem2D.instance.fixedTimeStep;
 
 PhysicsSystem2D.prototype.postUpdate = function (dt) {
-    _originpostUpdate.call(this, dt * game._kSpeed);
+    _originpostUpdate.call(this, dt *Game._kSpeed);
 }
 Game.prototype.set_kSpeed = function (ratio: number) {
-    game._kSpeed = ratio;
+    Game._kSpeed = ratio;
     PhysicsSystem2D.instance.fixedTimeStep = _originfixedTimeStep * ratio;
 }
 
