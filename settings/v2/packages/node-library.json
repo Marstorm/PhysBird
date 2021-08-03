@@ -5,17 +5,9 @@
       "items": [
         {
           "type": "cc.Prefab",
-          "value": "979adcdb-eb89-4ad1-ab01-50004da28aa8",
-          "name": "Wall",
-          "assetUuid": "979adcdb-eb89-4ad1-ab01-50004da28aa8",
-          "icon": "ui-kit://icon/images/ui-prefab/default.png",
-          "unlinkPrefab": true
-        },
-        {
-          "type": "cc.Prefab",
-          "value": "948d1562-14ce-4ddf-a7dd-8a1ce97b08bc",
-          "name": "ConstantComponent",
-          "assetUuid": "948d1562-14ce-4ddf-a7dd-8a1ce97b08bc",
+          "value": "34d71297-6c2e-45ae-ba1b-a02bfaacc9bb",
+          "name": "variable",
+          "assetUuid": "34d71297-6c2e-45ae-ba1b-a02bfaacc9bb",
           "icon": "ui-kit://icon/images/ui-prefab/default.png",
           "unlinkPrefab": true
         }

@@ -1,11 +1,13 @@
-import { _decorator, Component, Node, Label, Game, find, EventTouch } from 'cc';
+import { _decorator, Component, Node, Label, Game, find, EventTouch, CCFloat, Sprite } from 'cc';
 import {CAS} from './CAS'
 const { ccclass, property } = _decorator;
-
 
 @ccclass('CASVariable')
 export class CASVariable extends Component {
     cas: CAS =null!;
+
+    @property
+    value: number = 0;
 
     @property
     public constant: boolean = true;
@@ -13,13 +15,13 @@ export class CASVariable extends Component {
     @property
     public value_name: string = "";
 
+
     // _value: number = 0;
-    @property
-    value: number = null!;
+    
 
     public set_value(v: number){
-        if(!this.constant)
-            this.value=v;
+        // if(!this.constant)
+        this.value=v;
         this.update_value();
     }
     
@@ -29,57 +31,79 @@ export class CASVariable extends Component {
 
     start () {
         // [3]
-        
         let root = find('Canvas')!;
         this.cas = root.getComponentInChildren(CAS)!;
 
         this.value_name = this.cas.register_variable(this.value_name, this);
+        if(this.constant==false)
+            this.value = null!;
         this.update_value();
-        
         this.node.on(Node.EventType.TOUCH_START, this.onValueClick, this);
     }
     onLoad(){
         if(this.label == null){
-            this.label = this.node.getComponent(Label)!;
+            var node = new Node()
+            this.label = node.addComponent(Label)
+            this.label.fontSize = 20
         }
-        this.label.string = this.toString();
+        this.update_value()
     }
 
     public experssion(){
-        if(this.constant)
-            return this.value.toPrecision(2).toString();
-        if(this.value){
-            return `${this.value_name} = ${this.value.toPrecision(2)}`;
-        }
-        else
-            return this.value_name;
+        if(this.value)
+            return `${this.value.toFixed(1)}`
+        return this.value_name;
     }
-    public getvalue():number|String {
+
+    public is_known(): boolean{
         if(this.constant)
-            return this.value;
+            return true;
+        if(this.value)
+            return true;
         else
-            return this.value_name;
+            return false;
+    }
+
+
+    public getvalue():number {
+        return this.value;
     }
 
     public toString = () : string => {
-        return `${this.getvalue()}`;
+        return this.experssion();
     }
 
     public update_value(){
         // this.label.string = `${this.value_name} = ${this.value.toPrecision(2)}`;
-        this.label.string = this.experssion();
+        if(this.label)
+            this.label.string = this.experssion();
     }
 
     onValueClick(event: EventTouch){
         console.log('onValueClick',this);
         if(this.cas.active_var){
-            this.cas.connect(this.cas.active_var,this)
+            if(this.constant==false){
+                if(this.cas.active_var==this)
+                {
+                    this.value=null!;
+                }else
+                {
+                    this.cas.connect(this.cas.active_var,this)
+                }
+            }
+            const sprite=this.cas.active_var.getComponent(Sprite)
+            if(sprite){
+                sprite.enabled=false;
+            }
             this.cas.active_var = null!;
         }
         else{
             this.cas.active_var = this;
+            const sprite=this.getComponent(Sprite);
+            if(sprite){
+                sprite.enabled=true
+            }
         }
-
     }
 }
 

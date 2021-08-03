@@ -3,7 +3,8 @@
   "physics": {
     "fixedTimeStep": 0.016666,
     "defaultMaterial": {
-      "restitution": 1
+      "restitution": 1,
+      "spinningFriction": 0.1
     }
   }
 }

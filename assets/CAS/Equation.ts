@@ -2,8 +2,16 @@
 import { _decorator, Component, Node, EventTouch, find, math } from 'cc';
 import { CASVariable } from './Variable';
 import {CAS} from './CAS'
+
 const { ccclass, property } = _decorator;
 
+function removeItemOnce(arr:Array, value) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
 // @ccclass('Equation')
 export abstract class CASEquation extends Component {
     private CASRoot     : CAS = null!
@@ -22,7 +30,7 @@ export abstract class CASEquation extends Component {
     onValueChanged(event: EventTouch){
         
         console.log('onValueChanged', event, this);
-        return this.variableSet.length;
+        // return this.variableSet.length;
         // TODO: 判断当前有几个未知量
     }
 
@@ -31,17 +39,42 @@ export abstract class CASEquation extends Component {
 
     calculate_result(){
         //const variables = this.getComponentsInChildren(CASVariable)!;
-        let CASVarMap = this.CASRoot.named_map;
-
-        for(let i = 0; i < this.variableSet.length; i++){
-            let varName = this.variableSet[i];
-            if(varName != this.variableToGet){
-                let targetVar = CASVarMap.get(varName);
-                this.variableMap.set(varName, targetVar?.value);
+        var var_list=this.variables_list();
+        for (const v of var_list) {
+            if(v.is_known())
+            {
+                removeItemOnce(var_list,v);
             }
+        }
+        // 不知道什么问题。有时候unknown的变量没删干净
+        for (const v of var_list) {
+            if(v.is_known())
+            {
+                removeItemOnce(var_list,v);
+            }
+        }
+        if(var_list.length==1){
+            const equations = [this.experssion(),var_list[0].experssion()];
+            console.log(equations);
+            var v = var_list[0];
+            var res = nerdamer.solveEquations(this.experssion(),v.experssion()).map(
+                solution => nerdamer(solution).evaluate().toDecimal());
+            
+            console.log(res)
+            v.value=(parseFloat(res[0])) 
+            v.update_value()
         }
         // TODO: 完成计算逻辑
         return null;
+    }
+
+    public variables_list(){
+        let variables=[];
+        for(let variable of this.getComponentsInChildren(CASVariable)){
+            if(variable.constant==false)
+                variables.push(variable)
+        }
+        return variables;
     }
 
     // update (deltaTime: number) {

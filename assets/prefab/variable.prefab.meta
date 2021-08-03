@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "948d1562-14ce-4ddf-a7dd-8a1ce97b08bc",
+  "uuid": "34d71297-6c2e-45ae-ba1b-a02bfaacc9bb",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "VariableComponent"
+    "syncNodeName": "variable"
   }
 }

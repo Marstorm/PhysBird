@@ -1,0 +1,56 @@
+[
+  {
+    "__type__": "cc.AnimationClip",
+    "_name": "pig",
+    "_objFlags": 0,
+    "_native": "",
+    "sample": 60,
+    "speed": 1,
+    "wrapMode": 2,
+    "events": [],
+    "enableTrsBlending": false,
+    "_duration": 1.2,
+    "_keys": [
+      [
+        0,
+        0.5,
+        1.1833333333333333
+      ]
+    ],
+    "_stepness": 0,
+    "_curves": [
+      {
+        "modifiers": [
+          {
+            "__id__": 1
+          },
+          "spriteFrame"
+        ],
+        "data": {
+          "keys": 0,
+          "values": [
+            {
+              "__uuid__": "ac8814ea-571b-42d2-b4d2-5543feee49b9@c30fb",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "ac8814ea-571b-42d2-b4d2-5543feee49b9@c86cc",
+              "__expectedType__": "cc.SpriteFrame"
+            },
+            {
+              "__uuid__": "ac8814ea-571b-42d2-b4d2-5543feee49b9@e7223",
+              "__expectedType__": "cc.SpriteFrame"
+            }
+          ],
+          "easingMethods": {}
+        }
+      }
+    ],
+    "_commonTargets": [],
+    "_hash": 1792593774
+  },
+  {
+    "__type__": "cc.animation.ComponentPath",
+    "component": "cc.Sprite"
+  }
+]

@@ -1,6 +1,5 @@
 
 import { _decorator, Component, Node, Event, Button, EventHandler, Graphics, Label, game } from 'cc';
-import { Variable } from '../CAS/Constant';
 import { ShowMyRank } from './showMyRank';
 const { ccclass, property } = _decorator;
 

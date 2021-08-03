@@ -1,0 +1,84 @@
+{
+  "ver": "1.0.6",
+  "importer": "sprite-atlas",
+  "imported": true,
+  "uuid": "d6bc02dc-4357-44ca-9cc4-47bed7d0cc02",
+  "files": [
+    ".plist",
+    ".json"
+  ],
+  "subMetas": {
+    "7657a": {
+      "importer": "sprite-frame",
+      "uuid": "d6bc02dc-4357-44ca-9cc4-47bed7d0cc02@7657a",
+      "displayName": "",
+      "id": "7657a",
+      "name": "ice",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 622,
+        "trimY": 375,
+        "width": 160,
+        "height": 18,
+        "rawWidth": 45,
+        "rawHeight": 44,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "4a4b2512-adfb-48de-a6d2-c4f4ea7a14a8@6c48a",
+        "atlasUuid": "d6bc02dc-4357-44ca-9cc4-47bed7d0cc02"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "997cc": {
+      "importer": "sprite-frame",
+      "uuid": "d6bc02dc-4357-44ca-9cc4-47bed7d0cc02@997cc",
+      "displayName": "",
+      "id": "997cc",
+      "name": "rock",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 514,
+        "trimY": 528,
+        "width": 80,
+        "height": 18,
+        "rawWidth": 45,
+        "rawHeight": 44,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "4a4b2512-adfb-48de-a6d2-c4f4ea7a14a8@6c48a",
+        "atlasUuid": "d6bc02dc-4357-44ca-9cc4-47bed7d0cc02"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "atlasTextureName": "block.png",
+    "format": 3,
+    "uuid": "d6bc02dc-4357-44ca-9cc4-47bed7d0cc02",
+    "textureUuid": "4a4b2512-adfb-48de-a6d2-c4f4ea7a14a8@6c48a"
+  }
+}

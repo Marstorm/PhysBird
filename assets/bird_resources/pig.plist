@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>1.png</key>
+            <dict>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSourceSize</key>
+                <string>{80, 80}</string>
+                <key>textureRect</key>
+                <string>{{438, 712},{80, 80}}</string>
+            </dict>
+            
+            <key>2.png</key>
+            <dict>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSourceSize</key>
+                <string>{80, 80}</string>
+                <key>textureRect</key>
+                <string>{{438, 794},{80, 80}}</string>
+            </dict>
+            <key>3.png</key>
+            <dict>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSourceSize</key>
+                <string>{80, 80}</string>
+                <key>textureRect</key>
+                <string>{{438, 874},{80, 80}}</string>
+            </dict>
+<!-- 
+    normal_rect_list = [(438, 712, 80, 80), (438, 794, 80, 80), (438, 874, 80, 80)]
+    hurt1_rect_list = [(522, 794, 80, 80), (522, 872, 80, 80), (522, 948, 80, 80)]
+    hurt2_rect_list = [(438, 956, 80, 80), (522, 792, 80, 80), (522, 1026, 80, 80)]
+         -->
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
+            <key>realTextureFileName</key>
+            <string>full-sprite.png</string>
+            <key>size</key>
+            <string>{930, 1102}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:7b887e8d03ab53eac14a900e7517bd6a:88b6eaa687f45b21cefd7926cf2f7ba3:569d2b007616b4878bffdefcffa65111$</string>
+            <key>textureFileName</key>
+            <string>birds.png</string>
+        </dict>
+    </dict>
+</plist>

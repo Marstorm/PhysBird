@@ -2,7 +2,7 @@
 import { _decorator, Component, Node, EventTouch } from 'cc';
 import { CASEquation } from './Equation';
 import { CASVariable } from './Variable';
-
+// import {nerdamer} from './Nerdamer'
 
 const { ccclass, property } = _decorator;
 
@@ -18,7 +18,7 @@ class CAS extends Component{
         // find an suitable name
         let named_map = this.named_map;
         if(name=='' || named_map.size==0){
-            name = 'A';
+            name = 'a';
         }
         while(this.named_map.has(name)){
             name = String.fromCharCode(name?.charCodeAt(0)+1);
@@ -49,7 +49,10 @@ class CAS extends Component{
     }
 
     public connect(a:CASVariable, b: CASVariable){
-        this.nodes_map.set(a,b);
+        // a to b
+        //this.nodes_map.set(a,b);
+        if(a.is_known())
+            b.set_value(a.value)
     }
     onSolveDynamic(event: TouchEvent){
         console.log(this.solve_dynamic('v'))
@@ -58,6 +61,7 @@ class CAS extends Component{
     start(){
         cc.cas = this;
     }
+
     solve_dynamic(target: String){
         var es = this.get_equations()
         console.log(es);

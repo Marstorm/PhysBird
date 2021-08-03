@@ -4,20 +4,20 @@ import { CASEquation } from './Equation';
 import {CAS} from './CAS'
 const { ccclass, property } = _decorator;
 
-@ccclass('DistanceEquation')
-export class DistanceEquation extends CASEquation {
+@ccclass('GravityEquation')
+export class GravityEquation extends CASEquation {
     public experssion(): String {
-        return `${this.v} * ${this.t} = ${this.x}`;
+        return `${this.g} * ${this.t}* ${this.t} /2 = ${this.y}`;
     }
 
     @property(CASVariable)
-    v: CASVariable = null!;
+    g: CASVariable = null!;
 
     @property(CASVariable)
     t: CASVariable = null!;
 
     @property(CASVariable)
-    x: CASVariable = null!;
+    y: CASVariable = null!;
 
     start(){
         super.start()
